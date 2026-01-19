@@ -5,6 +5,7 @@ import com.tekion.queue_implementation.consumer.model.PartitionAssigner;
 import com.tekion.queue_implementation.producer.mappings.Partition;
 import com.tekion.queue_implementation.producer.model.Message;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -36,12 +37,13 @@ class MessageMonitor implements Runnable {
 
                     Message newMessage = messages.get(lastOffset);
 
-                    processMessage(consumer, newMessage);
+                    processMessage(consumer, newMessage, partition);
 
                     // Update offset
                     consumer.getOffset().put(partition, lastOffset + 1);
                 }
             }
+            //todo backpressure
             try {
                 Thread.sleep(500);
             } catch (InterruptedException e) {
@@ -51,7 +53,9 @@ class MessageMonitor implements Runnable {
         }
     }
 
-    private void processMessage(Consumer consumer, Message message) {
+    private void processMessage(Consumer consumer, Message message, Partition partition) {
+        Integer currentOffset = consumer.getOffset().get(partition);
+        consumer.getOffset().put(partition, currentOffset + 1);
         System.out.println("Consumer " + consumer.getConsumerId() + "message: "+ message.getValue());
     }
 }
