@@ -23,6 +23,7 @@ public class Topic {
     }
 
     private int getPartitionIndex(String key) {
+        System.out.println(Math.abs(key.hashCode()) % partitions.size());
         return Math.abs(key.hashCode()) % partitions.size();
     }
 
@@ -34,6 +35,7 @@ public class Topic {
     public void addMessage(Message message) {
         Partition partition = getPartition(message.getKey());
         List<Message> messageList = partition.getMessages();
+        System.out.println("message added to partition");
         messageList.add(message);
     }
 }
