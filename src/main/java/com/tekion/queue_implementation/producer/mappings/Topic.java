@@ -23,7 +23,6 @@ public class Topic {
     }
 
     private int getPartitionIndex(String key) {
-        System.out.println(Math.abs(key.hashCode()) % partitions.size());
         return Math.abs(key.hashCode()) % partitions.size();
     }
 

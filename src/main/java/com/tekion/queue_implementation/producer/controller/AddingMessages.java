@@ -19,8 +19,7 @@ public class AddingMessages {
     private AddToQueue addToQueue;
 
     @PostMapping("/{topicName}")
-    public String publish(@PathVariable String topicName, @RequestBody Message message) {
+    public void publish(@PathVariable String topicName, @RequestBody Message message) {
         addToQueue.addMessage(message, topicName);
-        return "Message added to topic " + topicName;
     }
 }
