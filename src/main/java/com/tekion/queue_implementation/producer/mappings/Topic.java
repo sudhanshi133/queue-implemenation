@@ -14,7 +14,8 @@ public class Topic {
     private String name;
     private List<Partition> partitions;
 
-    public Topic(int numberOfPartitions) {
+    public Topic(String name, int numberOfPartitions) {
+        this.name = name ;
         partitions = new ArrayList<>();
         for (int i = 0; i < numberOfPartitions; i++) {
             partitions.add(new Partition());
