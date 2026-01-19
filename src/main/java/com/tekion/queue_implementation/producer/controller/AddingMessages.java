@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller("/message")
 public class AddingMessages {
@@ -15,9 +16,9 @@ public class AddingMessages {
     @Autowired
     private AddToQueue addToQueue;
 
-    @PostMapping
-    public void addMessage(@RequestBody Message message) {
-        addToQueue.addMessage(message);
+    @PostMapping("/{topic_name}")
+    public void addMessage(@RequestBody Message message, @RequestParam String topicName) {
+        addToQueue.addMessage(message, topicName);
     }
 
 }

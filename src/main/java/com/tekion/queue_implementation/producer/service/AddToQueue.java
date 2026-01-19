@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class AddToQueue {
 
-    public void addMessage(Message message) {
+    public void addMessage(Message message, String topicName) {
        // addingMessages.addingMessages(message);
     }
 }
